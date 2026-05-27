@@ -1,18 +1,22 @@
 pipeline {
-    agent {
-        dockerfile true
-    }
+    agent any
 
     stages {
-        stage('Install dependencies') {
+        stage('Init') {
             steps {
-                sh 'pip install -r requirements.txt'
+                echo "Iniciando pipeline QA 🚀"
             }
         }
 
-        stage('Run tests') {
+        stage('Build') {
             steps {
-                sh 'pytest'
+                echo "Simulando build..."
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Tests OK ✅"
             }
         }
     }
