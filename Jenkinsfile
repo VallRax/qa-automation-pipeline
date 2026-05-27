@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Clonar código') {
-            steps {
-                git 'https://github.com/VallRax/qa-automation-pipeline.git'
-            }
-        }
+        
 
         stage('Instalar dependencias') {
             steps {
