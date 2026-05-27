@@ -1,30 +1,24 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.10'
-        }
-    }
+    agent any
 
     stages {
         stage('Instalar dependencias') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'python3 -m pip install --upgrade pip'
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
-        stage('Ejecutar tests API') {
+        stage('Tests API') {
             steps {
-                sh 'pytest'
+                sh 'pytest tests/api'
             }
         }
-    }
 
-    post {
-        always {
-            echo 'Proceso terminado'
-        }
-        failure {
-            echo '❌ Hay pruebas fallidas'
+        stage('Tests UI Selenium') {
+            steps {
+                sh 'pytest tests/ui'
+            }
         }
     }
 }
