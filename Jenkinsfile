@@ -3,11 +3,7 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/VallRax/qa-automation-pipeline.git'
-            }
-        }
+        
 
         stage('Instalar dependencias') {
             steps {
