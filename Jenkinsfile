@@ -4,20 +4,30 @@ pipeline {
     stages {
         stage('Instalar dependencias') {
             steps {
-                sh 'python3 -m pip install --upgrade pip'
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Tests API') {
             steps {
-                sh 'pytest tests/api'
+                sh '''
+                . venv/bin/activate
+                pytest tests/api
+                '''
             }
         }
 
         stage('Tests UI Selenium') {
             steps {
-                sh 'pytest tests/ui'
+                sh '''
+                . venv/bin/activate
+                pytest tests/ui
+                '''
             }
         }
     }
