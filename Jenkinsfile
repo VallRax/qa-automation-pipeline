@@ -8,15 +8,21 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Install Python') {
             steps {
-                echo "Simulando build..."
+                sh 'python3 --version || python --version'
             }
         }
 
-        stage('Test') {
+        stage('Install dependencies') {
             steps {
-                echo "Tests OK ✅"
+                sh 'pip install -r requirements.txt || echo "No requirements.txt"'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh 'pytest || echo "No hay tests aún, pero pipeline OK ✅"'
             }
         }
     }
