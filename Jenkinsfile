@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/VallRax/qa-automation-pipeline.git'
+            }
+        }
+
         stage('Instalar dependencias') {
             steps {
                 sh '''
@@ -29,6 +36,18 @@ pipeline {
                 pytest tests/ui
                 '''
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline terminado'
+        }
+        success {
+            echo 'TODO OK ✅'
+        }
+        failure {
+            echo 'FALLÓ ❌'
         }
     }
 }
