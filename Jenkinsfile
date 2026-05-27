@@ -1,21 +1,18 @@
 pipeline {
     agent {
-        docker {
-            image 'qa-automation-pipeline'
-            build true
-        }
+        dockerfile true
     }
 
     stages {
-        stage('Tests API') {
+        stage('Install dependencies') {
             steps {
-                sh 'pytest tests/api'
+                sh 'pip install -r requirements.txt'
             }
         }
 
-        stage('Tests UI Selenium') {
+        stage('Run tests') {
             steps {
-                sh 'pytest tests/ui'
+                sh 'pytest'
             }
         }
     }
